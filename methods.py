@@ -45,7 +45,7 @@ def get_application(request):
     return application, build
 
 def create_response(request):
-    response = HttpResponse('Crash report successfully send, thanks!', status=201)
+    response = HttpResponse('Crash report successfully send, thanks!', content_type='text/plain', status=201)
     response['Status'] = 201
     return response
 
