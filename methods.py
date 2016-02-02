@@ -7,6 +7,7 @@ from django.conf import settings
 from .models import Application, Crash
 import xml.etree.ElementTree as ET
 import re, os.path, base64, datetime
+import logging
 
 def parse_useragent(useragent):
     return re.findall(r'(\w[\s\w]*)/(\d+)', useragent)
@@ -82,7 +83,13 @@ def post_issue(request):
     if not key or key != settings.BUGS_POST_ISSUE_KEY:
         raise PermissionDenied
 
-    issue = ET.parse(request).getroot()
+    try:
+        issue = ET.parse(request).getroot()
+    except Exception, e:
+        logging.exception(e)
+        e = RuntimeError(request)
+        logging.exception(e)
+        raise e
     if issue is None:
         raise Http404
 
