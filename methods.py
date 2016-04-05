@@ -87,8 +87,10 @@ def post_issue(request):
         issue = ET.parse(request).getroot()
     except Exception, e:
         logging.exception(e)
-        e = RuntimeError(request)
-        logging.exception(e)
+        e1 = RuntimeError(request)
+        logging.exception(e1)
+        e2 = RuntimeError(request.body)
+        logging.exception(e2)
         raise e
     if issue is None:
         raise Http404
