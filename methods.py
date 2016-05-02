@@ -85,8 +85,7 @@ def post_issue(request):
 
     try:
         parser = ET.XMLParser(encoding='utf-8')
-        tree = ET.fromstring(request.body, parser=parser)
-        issue = tree.getroot()
+        issue = ET.fromstring(request.body, parser=parser)
     except Exception, e:
         logging.exception(e)
         e1 = RuntimeError(request)
