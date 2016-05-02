@@ -84,7 +84,9 @@ def post_issue(request):
         raise PermissionDenied
 
     try:
-        issue = ET.parse(request).getroot()
+        parser = ET.XMLParser(encoding='utf-8')
+        tree = ET.fromstring(request.body, parser=parser)
+        issue = tree.getroot()
     except Exception, e:
         logging.exception(e)
         e1 = RuntimeError(request)
