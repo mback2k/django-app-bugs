@@ -6,7 +6,7 @@ from django.http import HttpResponse, Http404
 from django.conf import settings
 from .models import Application, Crash
 import xml.etree.ElementTree as ET
-import re, os.path, base64, datetime
+import re, base64
 import logging
 
 def parse_useragent(useragent):
