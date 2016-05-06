@@ -83,14 +83,15 @@ def post_issue(request):
     if not key or key != settings.BUGS_POST_ISSUE_KEY:
         raise PermissionDenied
 
+    body = ('\n'.join(request.readlines())).strip()
     try:
         parser = ET.XMLParser(encoding='utf-8')
-        issue = ET.fromstring(request.body, parser=parser)
+        issue = ET.fromstring(body, parser=parser)
     except Exception, e:
         logging.exception(e)
         e1 = RuntimeError(request)
         logging.exception(e1)
-        e2 = RuntimeError(request.body)
+        e2 = RuntimeError(body)
         logging.exception(e2)
         raise e
     if issue is None:
