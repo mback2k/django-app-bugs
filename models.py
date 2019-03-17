@@ -20,8 +20,8 @@ class Crash(models.Model):
         verbose_name_plural = _('Crashes')
         ordering = ('-build', '-crdate', '-tstamp')
 
-    def __unicode__(self):
-        return u'%s Build %d' % (self.application, self.build)
+    def __str__(self):
+        return '%s Build %d' % (self.application, self.build)
 
 """
 SQL-Statement to convert crash reports saved as Redmine issues:
