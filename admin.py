@@ -10,6 +10,6 @@ class CrashAdmin(admin.ModelAdmin):
     list_filter = ('application', 'build',
                    'is_solved', 'is_obsolete',
                    'crdate', 'tstamp')
-    date_hierarchy = 'crdate'
+    #date_hierarchy = 'crdate'
 
 admin.site.register(Crash, CrashAdmin)
