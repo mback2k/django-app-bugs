@@ -23,7 +23,7 @@ def get_authentication(request):
     if auth[0].lower() != "basic":
         raise PermissionDenied
 
-    username, password = base64.b64decode(auth[1]).split(':')
+    username, password = base64.b64decode(auth[1].encode('ascii')).split(':')
     if not username or not password or username != password:
         raise PermissionDenied
 
