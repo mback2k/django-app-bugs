@@ -59,7 +59,8 @@ def post_crashreport(request):
     if not application or not build:
         raise Http404
 
-    report = ('\n'.join(request.readlines())).strip()
+    lines = map(lambda x: x.decode('utf-8'), request.readlines())
+    report = ('\n'.join(lines)).strip()
     if not report or len(report) > 1024:
         raise Http404
 
