@@ -84,7 +84,8 @@ def post_issue(request):
     if not key or key != settings.BUGS_POST_ISSUE_KEY:
         raise PermissionDenied
 
-    body = (''.join(request.readlines())).strip()
+    lines = map(lambda x: x.decode('utf-8'), request.readlines())
+    body = (''.join(lines)).strip()
     try:
         parser = ET.XMLParser(encoding='utf-8')
         issue = ET.fromstring(body, parser=parser)
